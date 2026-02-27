@@ -5,7 +5,7 @@ defmodule Demo.MixProject do
     [
       app: :demo,
       version: "0.1.0",
-      elixir: "~> 1.19",
+      elixir: "~> 1.18",
       start_permanent: Mix.env() == :prod,
       deps: deps()
     ]
@@ -23,7 +23,7 @@ defmodule Demo.MixProject do
   defp deps do
     [
       {:xinesis, github: "knocklabs/xinesis"},
-      {:kcl_ex, github: "knocklabs/kcl_ex"},
+      {:kinesis_client, github: "knocklabs/kcl_ex"},
       {:ex_aws_dynamo, "~> 4.2.2", override: true},
       # {:ex_aws_dynamo,
       #  github: "ex-aws/ex_aws_dynamo",
