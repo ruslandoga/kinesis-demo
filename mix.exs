@@ -24,7 +24,6 @@ defmodule Demo.MixProject do
     [
       {:xinesis, github: "knocklabs/xinesis"},
       {:kinesis_client, github: "knocklabs/kcl_ex"},
-      {:ex_aws_dynamo, "~> 4.2.2", override: true},
       {:finch, "~> 0.21.0"}
     ]
   end

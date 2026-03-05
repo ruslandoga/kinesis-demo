@@ -1,0 +1,16 @@
+services:
+  localstack:
+    image: localstack/localstack:4.14.0
+    ports:
+      - 4566:4566
+    environment:
+      SERVICES: kinesis,dynamodb
+      KINESIS_MOCK_PROVIDER_ENGINE: scala
+      KINESIS_LATENCY: 250
+      KINESIS_SHARD_LIMIT: infinity
+      KINESIS_ERROR_PROBABILITY: 0.1
+    volumes:
+      - localstack_data:/var/lib/localstack
+
+volumes:
+  localstack_data:

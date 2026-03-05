@@ -8,8 +8,22 @@ defmodule Demo.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      # Starts a worker by calling: Demo.Worker.start_link(arg)
-      # {Demo.Worker, arg}
+      {Finch, name: Demo.Finch},
+      {Demo.Broadway,
+       concurrency: System.schedulers(),
+       producer: [
+         module:
+           {Xinesis.Producer,
+            access_key_id: "test",
+            secret_access_key: "test",
+            stream_arn: Demo.stream_arn(),
+            url: "http://localhost:4566",
+            worker_name: "xinesis-1",
+            lease:
+              {Xinesis.Lease.ExAwsDynamo,
+               table: Demo.dynamo_table(),
+               config_overrides: [scheme: "http://", host: "localhost", port: 4566]}}
+       ]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

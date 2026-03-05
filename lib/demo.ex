@@ -3,16 +3,22 @@ defmodule Demo do
   Documentation for `Demo`.
   """
 
-  @doc """
-  Hello world.
+  @stream "demo-stream"
 
-  ## Examples
+  def stream_name, do: @stream
 
-      iex> Demo.hello()
-      :world
+  def put_records(count) do
+    records =
+      Enum.map(1..count, fn i ->
+        %{
+          "Data" => i |> :binary.encode_unsigned() |> Base.encode64(),
+          "PartitionKey" => "partition-#{i}"
+        }
+      end)
 
-  """
-  def hello do
-    :world
+    request("PutRecords", %{"StreamName" => @stream, "Records" => records})
+  end
+
+  def request(action, data) do
   end
 end
